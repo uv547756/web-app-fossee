@@ -24,7 +24,7 @@ python manage.py createsuperuser
 # start the server
 python manage.py runserver
 ```
- *Optionally*, Create a `.env` file under `/backend/backend/`
+ *Optionally* in production, Create a `.env` file under `/backend/backend/`
  and Enter your django secret key, sample `.env`:
 ```
 SECRET_KEY_DJANGO=<YOUR_SECRET_KEY>
