@@ -1,7 +1,8 @@
 import json
 from io import BytesIO
 from django.http import FileResponse, Http404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.files.storage import default_storage
@@ -16,6 +17,7 @@ from reportlab.pdfgen import canvas
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def upload_csv(request):
     if 'file' not in request.FILES:
         return Response({"error": "CSV file not provided"}, status=400)
@@ -116,6 +118,7 @@ def upload_csv(request):
 #     return Response(serializer.data, status=201)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def history(request):
     datasets = EquipmentDataset.objects.order_by('-uploaded_at')[:5]
     serializer = EquipmentDatasetSerializer(datasets, many=True)
@@ -124,6 +127,7 @@ def history(request):
 # TO-DO add pdf download opton
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def dataset_report_pdf(request, pk):
     """
     Generate a simple PDF report for dataset `pk` and return as FileResponse.
