@@ -1,7 +1,9 @@
 import pandas as pd
+from django.core.files.storage import default_storage
 
 def analyze_csv(file_path):
-    df = pd.read_csv(file_path)
+    absolute_path = default_storage.path(file_path)
+    df = pd.read_csv(absolute_path)
 
     total_count = len(df)
 
