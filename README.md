@@ -1,7 +1,7 @@
 ### Initialise the project
 Clone the project:
 ```
-git clone https://github.com/uv547756/web-app-fossee.git
+git clone https://github.com/cassia-cryp/visualizer-fossee.git
 ```
 Install all the dependencies:
 
@@ -24,12 +24,22 @@ python manage.py createsuperuser
 # start the server
 python manage.py runserver
 ```
- Create a `.env` file under `/backend/backend/`
+ *Optionally*, Create a `.env` file under `/backend/backend/`
  and Enter your django secret key, sample `.env`:
 ```
 SECRET_KEY_DJANGO=<YOUR_SECRET_KEY>
 ```
- 
+Then, add this to `backend/backend/settings.py`
+```
+import os
+from dotenv import load_dotenv
+
+# change
+SECRET_KEY = <YOUR_KEY>
+
+# to
+SECRET_KEY = os.getenv('SECRET_KEY_DJANGO')
+``` 
 
 ### Initalise the frontend (React)
 1. Navigate to frontend `cd main-frontend` 
